@@ -1,0 +1,20 @@
+# Systemd Service Unit File for Ansible Server Updates
+# Author: Richard Chamberlain
+# Company: Sebos Technology
+# Description: Runs an Ansible playbook to update Linux servers in the home lab, triggered by a systemd timer.
+
+[Unit]
+Description=Updates linuxservers in my home lab
+Wants=update_servers.timer
+
+[Service]
+## Service call
+Type=oneshot
+User=ansible_admin
+WorkingDirectory=/usr/local/bin/ansible
+ExecStart=/usr/bin/ansible-playbook ansible_update.yml
+StandardOutput=append:/var/log/ansible_update.log
+StandardError=append:/var/log/ansible_update.err
+
+[Install]
+WantedBy=multi-user.target

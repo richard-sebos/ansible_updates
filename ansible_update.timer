@@ -1,0 +1,17 @@
+# Timer Unit File for Scheduling Ansible Updates
+# Author: Richard Chamberlain
+# Company: Sebos Technology
+# Description: Systemd timer to schedule the server to call an Ansible script for updating servers in the home lab.
+
+[Unit]
+Description=Timer for Updating servers using Asnible
+
+[Timer]
+OnCalendar=*-*-* 23:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
+
+
